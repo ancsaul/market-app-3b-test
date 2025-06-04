@@ -1,11 +1,9 @@
-package com.tecdesoftware.market.persintance.entity;
+package com.tecdesoftware.market.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table (name = "compras")
@@ -29,6 +27,16 @@ public class Compra {
 
     private boolean estado;
 
+    //relacion con la entidad cliente: muchas compras
+    @ManyToOne
+    //no quiero que se modifique la entidad cliente, solo relacionarla
+    @JoinColumn (name = "id_cliente", insertable = false, updatable = false)
+    private Cliente cliente;
+
+
+    //relacion con la entidad compraproducto
+    @OneToMany(mappedBy = "producto")
+    private List<Compra> compras;
 
     public int getIdCompra() {
         return idCompra;

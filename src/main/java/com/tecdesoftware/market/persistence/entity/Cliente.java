@@ -1,9 +1,8 @@
-package com.tecdesoftware.market.persintance.entity;
+package com.tecdesoftware.market.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "clientes")
@@ -13,15 +12,18 @@ public class Cliente {
     private String id;
     private String nombre;
 
-    @Column (name = "apellidos)
+    @Column (name = "apellidos")
     private String apellido;
-
 
     private String direccion;
     private Long celular;
 
     @Column (name = "correo_electronico")
     private String email;
+
+
+    @OneToMany (mappedBy = "cliente")
+    private List <Compra> compras;
 
     public String getId() {
         return id;
