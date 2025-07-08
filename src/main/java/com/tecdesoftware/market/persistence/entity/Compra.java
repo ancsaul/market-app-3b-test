@@ -6,37 +6,33 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table (name = "compras")
-public class Compra {
-    @Id
-    @Column(name = "id_compra")
+@Table(name="compras")
+public class Compra
+{
+    @Id //Es la llave primaria
+    @Column(name="id_compra")
+    //Autogenera ids autoincrementables
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int idCompra;
-
-    private String nombre;
-    @Column(name = "id_cliente")
-    private Integer idCliente;
-
-
+    @Column(name="id_producto")
+    private int idProducto;
+    @Column(name="id_cliente")
+    private int idCliente;
     private LocalDateTime fecha;
-
-    @Column(name = "medio_pago")
+    @Column(name="medio_pago")
     private String medioPago;
-
-
     private String comentario;
+    private String estado;
 
-    private boolean estado;
-
-    //relacion con la entidad cliente: muchas compras
+    //Relación con Cliente: Muchas compras para un cliente
     @ManyToOne
-    //no quiero que se modifique la entidad cliente, solo relacionarla
-    @JoinColumn (name = "id_cliente", insertable = false, updatable = false)
+    //Insertable/Updatable en false es para que no haya modificaciones
+    @JoinColumn(name="id_cliente", insertable=false, updatable=false)
     private Cliente cliente;
 
-
-    //relacion con la entidad compraproducto
-    @OneToMany(mappedBy = "producto")
-    private List<Compra> compras;
+    //Una compra tiene muchos productos
+    @OneToMany(mappedBy = "compra")
+    private List<ComprasProducto> productos;
 
     public int getIdCompra() {
         return idCompra;
@@ -46,19 +42,19 @@ public class Compra {
         this.idCompra = idCompra;
     }
 
-    public String getNombre() {
-        return nombre;
+    public int getIdProducto()  {
+        return idProducto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
-    public Integer getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -86,11 +82,11 @@ public class Compra {
         this.comentario = comentario;
     }
 
-    public boolean isEstado() {
+    public String getActivo() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setActivo(String activo) {
+        this.estado = activo;
     }
 }

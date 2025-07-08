@@ -17,8 +17,8 @@ public class Producto {
     @Column(name = "id_categoria")
     private Integer idCategoria;
 
-    @Column (name =  "codgio_barras")
-    private String idcategoria;
+    @Column (name =  "codigo_barras")
+    private String codigoBarras;
 
     @Column (name = "precio_venta")
     private Double precioVenta;
@@ -60,12 +60,12 @@ public class Producto {
         this.idCategoria = idCategoria;
     }
 
-    public String getIdcategoria() {
-        return idcategoria;
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
-    public void setIdcategoria(String idcategoria) {
-        this.idcategoria = idcategoria;
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
     }
 
     public Double getPrecioVenta() {
@@ -100,4 +100,5 @@ public class Producto {
         this.categoria = categoria;
     }
     /// lolo
+
 }

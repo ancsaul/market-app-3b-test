@@ -5,31 +5,27 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "clientes")
+@Table(name="clientes")
 public class Cliente {
 
     @Id
-    private String id;
+    //No se pondra el @GereratedValue porque sera el INE (Se pondra manual)
+    private int id;
     private String nombre;
-
-    @Column (name = "apellidos")
     private String apellido;
-
-    private String direccion;
     private Long celular;
+    private String direccion;
+    @Column(name="correo_electronico")
+    private String correoElectronico;
 
-    @Column (name = "correo_electronico")
-    private String email;
+    @OneToMany(mappedBy = "cliente")
+    private List<Compra> compras;
 
-
-    @OneToMany (mappedBy = "cliente")
-    private List <Compra> compras;
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -49,14 +45,6 @@ public class Cliente {
         this.apellido = apellido;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
     public Long getCelular() {
         return celular;
     }
@@ -65,11 +53,19 @@ public class Cliente {
         this.celular = celular;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
 }
